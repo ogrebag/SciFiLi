@@ -1,4 +1,3 @@
-
 public class Book {
 	private String title;
 	private String author;
@@ -19,6 +18,10 @@ public class Book {
 		
 	}
 	
+	// added this because of data type issues with checkout method
+	public Book(String nextLine) {
+	}
+
 	public String getTitle()
 	{
 		return title;
