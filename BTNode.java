@@ -1,36 +1,51 @@
-class BTNode{
-    private int data;
-    private BTNode left;
-    private BTNode right;
+/* Class BTNode */
+class BTNode
+{    
+    BTNode left, right;
+    Book data;
 
-    public BTNode(int element){
-        data = element;
+    /* Constructor */
+    public BTNode()
+    {
         left = null;
         right = null;
+        data = null;
     }
-
-    public void setRightChild(BTNode n)
+    /* Constructor */
+    public BTNode(Book n)
+    {
+        left = null;
+        right = null;
+        data = null;
+    }
+    /* Function to set left node */
+    public void setLeft(BTNode n)
+    {
+        left = n;
+    }
+    /* Function to set right node */ 
+    public void setRight(BTNode n)
     {
         right = n;
     }
-
-    public void setLeftChild(BTNode n){
-        left = n;
-    }
-
-    public BTNode getRightChild(){
-        return right;
-    }
-
-    public BTNode getLeftChild(){
+    /* Function to get left node */
+    public BTNode getLeft()
+    {
         return left;
     }
-
-    public int getData(){
+    /* Function to get right node */
+    public BTNode getRight()
+    {
+        return right;
+    }
+    /* Function to set data to node */
+    public void setData(Book d)
+    {
+        data = d;
+    }
+    /* Function to get data from node */
+    public Book getData()
+    {
         return data;
-    }
-
-    public void setData(int x){
-        data = x;
-    }
+    }     
 }
