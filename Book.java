@@ -17,10 +17,6 @@ public class Book {
 		priority = p;
 		
 	}
-	
-	// added this because of data type issues with checkout method
-	public Book(String nextLine) {
-	}
 
 	public String getTitle()
 	{

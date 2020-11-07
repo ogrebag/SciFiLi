@@ -8,24 +8,19 @@ public class Main {
         File libraryFile = new File("log.txt");
         Scanner scanner = new Scanner(libraryFile);
 
-        /*scifili array to hold the required variables*/
-        Library[] scifili = new Library[108];
-
-        int x=0;
+        /*scifili(BT) to hold the required variables*/
+        Library scifili = new Library();
 
         String string; // holds the string you read from the file
         String[] split;  // Holds the string after splitting
 
         // going through the file and storing the books
+        int i = 0;
         while(scanner.hasNext()) {
             string = scanner.nextLine();
             split = string.split(", "); // splitting to seperate the data
-            String title = split[0]; // title
-            String author = split[1]; // author
-            int status = Integer.parseInt(split[2]); // status
-            int priority = Integer.parseInt(split[3]);  // priority
-            scifili[x] = new Library(title, author, status, priority); // Array to hold the variables above
-            x++;    // Going through each line
+            scifili.insert(split[i]); // ==> needs to be a Book object and not object
+            i++;
         }
 
         /*The user menu*/
@@ -44,6 +39,7 @@ public class Main {
             System.out.println("6 - Are you trying to check in?");
             System.out.println("7 - Are you trying to check out?");
             System.out.println("8 - Are you leaving and need a list of the books?");
+            System.out.println("Exit");
             System.out.println();
 
             String userInput = user.nextLine(); // scanning user input
@@ -51,7 +47,7 @@ public class Main {
             // if the user wants to sort by author name
             // NOT WORKING FOR SOME REASON
             if (userInput.equals("1")) {
-
+                
             }
 
             // if the user wants to sort by the title
@@ -61,7 +57,7 @@ public class Main {
 
             // if there is a fire
             else if (userInput.equals("3")) {
-                isMenuOpen = false;
+                System.out.println(scifili.searchTitle());
             }
 
             // if the user is searching based on author name
@@ -83,11 +79,17 @@ public class Main {
 
             // if the user is trying to check out
             else if (userInput.equals("7")) {
-                System.out.println("What book are you checking out?"); // asking what book to checkout
-                Scanner userBook = new Scanner(System.in); 
-                // before checking out I need to search for that book and finds it index
-                // scifili[0] shouldnt be zero; it should be the index of the user book
-                scifili[0].checkout(new Book(userBook.nextLine()));  // checking out process            
+                System.out.println("How many books are you checking out today?"); // asking what book to checkout
+                Scanner userPile = new Scanner(System.in);
+                int userBooks = Integer.parseInt(userPile.nextLine()); 
+                System.out.println("What books are you checking out today?");
+                // NEED TO KEEP OPEN TO ASK THE USER FOR MORE BOOKS
+                // NEED TO KNOW WHICH BOOK TO CHANGE STATUS FOR - USE SEARCH TITLE METHOD
+                for(;userBooks>0;userBooks--){
+                    Scanner ub = new Scanner(System.in);
+                    //scifili[0].checkout(new Book(ub.nextLine()));
+                    System.out.println("checked out");
+                }
             }
 
             // if the user is leaving the library
@@ -109,9 +111,7 @@ public class Main {
                 try {
                     FileWriter myWriter = new FileWriter("LibraryStatus.txt");
                     myWriter.write("Title\t\tAuthor\t\tStatus\n");
-                    for(int b=0;b<scifili.length;b++){
-                        myWriter.write(scifili[b].endDay());
-                    }
+                    // NEED TO GIVE THE STATUSES
                     myWriter.close();
                     System.out.println("Successfully wrote to the file.");
                   } catch (IOException e) {
@@ -121,10 +121,29 @@ public class Main {
                 isMenuOpen = false; // closing the menu
             }
 
+            // if the user wants to exit
+            else if (userInput.equals("Exit")) {
+                isMenuOpen = false;
+            }
+
             // if the user input is invalid
             else {
                 System.out.println("invalid input!");
             }
         }
     } 
+
+    // Method for checking in and checking out
+    public void checkBook(){
+        // push into the stack till done and no books
+        // pop those books out and change their status
+    }
+
+    // Method for sorting based on author name
+    public String sortAuthor(){
+        // copy the binary tree
+        // and turn it into a heap 
+        // then start removing the author names
+        return "";
+    }
 }
