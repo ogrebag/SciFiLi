@@ -50,6 +50,9 @@ public class Book {
 	{
 		priority = p;
 	}
+	public String toString(){
+		return(title + " " + status);
+	}
 	
 	
 	
