@@ -16,7 +16,7 @@ class BTNode
     {
         left = null;
         right = null;
-        data = null;
+        data = n;
     }
     /* Function to set left node */
     public void setLeft(BTNode n)

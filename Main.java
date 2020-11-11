@@ -22,7 +22,8 @@ public class Main {
             String author = split[1];
             int status = Integer.parseInt(split[2]);
             int priority = Integer.parseInt(split[3]);
-            scifili.insert(new Book(title, author, status, priority)); // ==> needs to be a Book object and not object
+            Book book = new Book(title, author, status, priority);
+            scifili.insert(book); // ==> needs to be a Book object and not object
         }
 
         /*The user menu*/
