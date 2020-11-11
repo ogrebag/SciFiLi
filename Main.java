@@ -11,6 +11,8 @@ public class Main {
         /*scifili(BT) to hold the required variables*/
         Library scifili = new Library();
 
+        Stack<String> pile = new Stack();
+
         String string; // holds the string you read from the file
         String[] split;  // Holds the string after splitting
 
@@ -65,21 +67,29 @@ public class Main {
             else if (userInput.equals("4")) {
                 System.out.println("Who is the author you are looking for?"); 
                 Scanner userAuthor = new Scanner(System.in);
-                scifili.searchAuthor(userAuthor.nextLine());
+                System.out.println(scifili.searchAuthor(userAuthor.nextLine()));
             }
 
             // if the user is searching based on title
             else if (userInput.equals("5")) {
                 System.out.println("What book are you looking for?"); 
                 Scanner userTitle = new Scanner(System.in);
-                String result = scifili.searchTitle(userTitle.nextLine());
-                System.out.println(result);
+                scifili.searchTitle(userTitle.nextLine());
             }
 
             // if the user is trying to check in
             else if (userInput.equals("6")) {
-                System.out.println("What book are you checking in?"); 
-                Scanner userBook = new Scanner(System.in);
+                System.out.println("What book are you checking in?");
+                System.out.println("type \"no\" to stop checking in/out"); 
+                while(true){
+                    Scanner userBook = new Scanner(System.in);
+                    String s = userBook.nextLine();
+                    if(s.equals("no")){
+                        break;
+                    } else {
+                        pile.Push(s);
+                    }
+                }
             }
 
             // if the user is trying to check out
@@ -129,9 +139,13 @@ public class Main {
     }
 
     // Method for checking in and checking out
-    public void checkBook(Book userBook) {
+    public void checkBook(Stack pile) {
         // push into the stack till done and no books
         // pop those books out and change their status
+        // pop from the tree and find it in the tree and then change the status
+        while(!(pile.IsEmpty())){
+
+        }
     }
 
     // Method for sorting based on author name
