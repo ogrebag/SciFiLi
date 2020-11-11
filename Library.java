@@ -57,25 +57,24 @@ public class Library {
         }
     }
     /* Function to search for an element */
-    public String search(String val)
+    public void search(String val)
     {
-        return search(root, val);
+        search(root, val);
     }
     /* Function to search for an element recursively */
-    private String search(BTNode r, String val)
+    private void search(BTNode current, String value)
     {
-        if (r.getData().getTitle().equals(val))
-            return r.getData().toString();
+        if (value.compareTo(current.getData().getTitle()) == 0)
+            System.out.println(current.getData().toString());
 
-        if (!(r.getLeft().getData().getTitle().equals(null)))
-            if (r.getLeft().getData().getTitle().equals(val))
-                return r.getData().toString();
+        else if ((value.compareTo(current.getData().getTitle()) < 0))
+            search(current.getLeft(), value);
 
-        if (!(r.getRight().getData().getTitle().equals(null)))
-            if (r.getRight().getData().getTitle().equals(val))
-                return r.getData().toString();
-
-        return ("Nothing Found");         
+        else if ((value.compareTo(current.getData().getTitle()) > 0))
+            search(current.getRight(), value);
+        else{
+            System.out.println("Nothing Found"); 
+        }        
     }
     /* Function for inorder traversal */
     public void inorder()
@@ -91,7 +90,23 @@ public class Library {
             inorder(r.getRight());
         }
     }
-    /* Function for preorder traversal */
+    /* Function for inorder traversal */
+    public String authorTraverse(String authorName)
+    {
+        return authorTraverse(root, authorName);
+    }
+    private String authorTraverse(BTNode r, String authorName)
+    {
+        String title = "";
+        if (r != null && authorName == r.getData().getAuthor())
+        {
+            authorTraverse(r.getLeft(), authorName);
+            title = r.getLeft().getData().getTitle();
+            authorTraverse(r.getRight(), authorName);
+        }
+        return title;
+    }
+/* Function for preorder traversal */
     public void preorder()
     {
         preorder(root);
@@ -125,13 +140,16 @@ public class Library {
         // traverse the binary tree and return all the books by that author
         // if userauthor.equals(r.getData().getAuthor)
         // then print that out
-        // else go to the next node 
-        return "";
+        // else go to the next node
+        String books = "";
+        books += (authorTraverse(userAuthor) + " ");    
+        return books;
+        
 	}
 
     // Method for searching by title
-    public String searchTitle(String title){
-        return search(title);
+    public void searchTitle(String title){
+        search(title);
     }
 
     // Sorting by title
@@ -141,6 +159,7 @@ public class Library {
 
     // Method for changing status
     public void statChange(BTNode r){
+        // do this in the book class
         // only called when the checkBook Method is called
         if(r.getData().getStatus() == 1){
             r.getData().setStatus(0);

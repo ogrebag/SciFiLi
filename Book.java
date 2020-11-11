@@ -51,7 +51,7 @@ public class Book {
 		priority = p;
 	}
 	public String toString(){
-		return(title + " " + status);
+		return("Author: " + author + "\t\tStatus: " + status);
 	}
 	
 	
