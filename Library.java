@@ -19,16 +19,19 @@ public class Library {
     {
         root = insert(root, data);
     }
-    /* Function to insert data recursively */
+    /* Function to insert data recursively based on the title*/
      private BTNode insert(BTNode current, Book value) {
         if (current == null) {
             current = new BTNode(value);
         }
-        if (value.getTitle().compareTo(current.getData().getTitle()) < 0) { // if alphabetically lower
+        // current is not heolding any data and thats the bug
+        else if (value.getTitle().compareTo(current.getData().getTitle()) < 0) { // if alphabetically lower
             current.left = insert(current.left, value);
-        } else if (value.getTitle().compareTo(current.getData().getTitle()) > 0) {  // if alphabetically higher
+        } 
+        else if (value.getTitle().compareTo(current.getData().getTitle()) > 0) {  // if alphabetically higher
             current.right = insert(current.right, value);
-        } else {
+        } 
+        else {
             // value already exists
             return current;
         }
@@ -84,7 +87,7 @@ public class Library {
         if (r != null)
         {
             inorder(r.getLeft());
-            System.out.print(r.getData().getTitle() +" ");
+            System.out.println(r.getData().getTitle() +" ");
             inorder(r.getRight());
         }
     }
