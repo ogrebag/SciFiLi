@@ -64,17 +64,34 @@ public class Library {
     /* Function to search for an element recursively */
     private void search(BTNode current, String value)
     {
-        if (value.compareTo(current.getData().getTitle()) == 0)
+        if ((value.compareTo(current.getData().getTitle()) == 0) && (current != null))
             System.out.println(current.getData().toString());
 
-        else if ((value.compareTo(current.getData().getTitle()) < 0))
+        else if ((value.compareTo(current.getData().getTitle()) < 0) && (current != null))
             search(current.getLeft(), value);
 
-        else if ((value.compareTo(current.getData().getTitle()) > 0))
+        else if ((value.compareTo(current.getData().getTitle()) > 0) && (current != null))
             search(current.getRight(), value);
         else{
             System.out.println("Nothing Found"); 
         }        
+    }
+    /* Function to change book status */
+    public void statChange(String val)
+    {
+        statChange(root, val);
+    }
+    /* Function to change book status recursively */
+    private void statChange(BTNode current, String value)
+    {
+        if (value.compareTo(current.getData().getTitle()) == 0)
+            current.getData().setStatus();
+
+        else if ((value.compareTo(current.getData().getTitle()) < 0))
+            statChange(current.getLeft(), value);
+
+        else if ((value.compareTo(current.getData().getTitle()) > 0))
+            statChange(current.getRight(), value);
     }
     /* Function for inorder traversal */
     public void inorder()
@@ -91,22 +108,38 @@ public class Library {
         }
     }
     /* Function for inorder traversal */
-    public String authorTraverse(String authorName)
+    public void authorTraverse(String authorName)
     {
-        return authorTraverse(root, authorName);
+        authorTraverse(root, authorName);
     }
-    private String authorTraverse(BTNode r, String authorName)
+    private void authorTraverse(BTNode r, String authorName)
     {
-        String title = "";
-        if (r != null && authorName == r.getData().getAuthor())
+        if (r != null) // when it doesnt match, it just ends the function
         {
             authorTraverse(r.getLeft(), authorName);
-            title = r.getLeft().getData().getTitle();
+            if (authorName.equals(r.getData().getAuthor())){
+                System.out.println(r.getData().getTitle() + "\t\t" + r.getData().getStatus()); 
+            }
             authorTraverse(r.getRight(), authorName);
         }
-        return title;
     }
-/* Function for preorder traversal */
+    // /* Function for inorder traversal */
+    // public String endDay()
+    // {
+    //     return endDay(root);
+    // }
+    // private String endDay(BTNode r)
+    // {
+    //     if (r != null)
+    //     {
+    //         endDay(r.getLeft());
+    //         if(r.getData().getStatus()==true){
+    //             return r.getData().toString();
+    //         }
+    //         endDay(r.getRight());
+    //     }
+    // }
+    /* Function for preorder traversal */
     public void preorder()
     {
         preorder(root);
@@ -136,14 +169,12 @@ public class Library {
     }  
 
 	// Method for searching by author
-    public String searchAuthor(String userAuthor) {
+    public void searchAuthor(String userAuthor) {
         // traverse the binary tree and return all the books by that author
         // if userauthor.equals(r.getData().getAuthor)
         // then print that out
         // else go to the next node
-        String books = "";
-        books += (authorTraverse(userAuthor) + " ");    
-        return books;
+        authorTraverse(userAuthor);    
         
 	}
 
@@ -155,17 +186,5 @@ public class Library {
     // Sorting by title
     public void sortTitle(){
         inorder();
-    }
-
-    // Method for changing status
-    public void statChange(BTNode r){
-        // do this in the book class
-        // only called when the checkBook Method is called
-        if(r.getData().getStatus() == 1){
-            r.getData().setStatus(0);
-        } 
-        else if(r.getData().getStatus() == 0){
-            r.getData().setStatus(1);
-        }
     }
 }
