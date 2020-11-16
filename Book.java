@@ -1,7 +1,7 @@
 public class Book {
 	private String title;
 	private String author;
-	private int status;
+	private boolean status;
 	private int priority;
 	
 	public Book()
@@ -9,7 +9,7 @@ public class Book {
 		title = "";
 		author = "";
 	}
-	public Book(String t, String a, int s, int p)
+	public Book(String t, String a, boolean s, int p)
 	{
 		title = t;
 		author = a;
@@ -34,13 +34,13 @@ public class Book {
 	{
 		author = a;
 	}
-	public int getStatus()
+	public boolean getStatus()
 	{
 		return status;
 	}
-	public void setStatus(int s)
+	public void setStatus()
 	{
-		status = s;
+		status = !status;
 	}
 	public int getPriority()
 	{
@@ -51,10 +51,12 @@ public class Book {
 		priority = p;
 	}
 	public String toString(){
-		return("Author: " + author + "\t\tStatus: " + status);
+		// if(status = true){
+		// 	return("Author: " + author + "\t\tStatus: Row " + priority);
+		// }
+		// else {
+		// 	return("Author: " + author + "\t\tStatus: Taken");
+		// }
+		return("Title: " + title + "\t\tAuthor: " + author + "\t\tStatus: " + status);
 	}
-	
-	
-	
-	
 }
